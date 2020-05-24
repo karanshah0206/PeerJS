@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
             username: 'empty',
         },
     });
-    // create our WebRTC connection
+    // Create our WebRTC connection
     const webrtc = new SimpleWebRTC({
         // the id/element dom element that will hold "our" video
         localVideoEl: 'local-video',
@@ -33,5 +33,19 @@ window.addEventListener('load', () => {
     webrtc.on('localStream', () => {
         localImageEl.hide();
         localVideoEl.show();
+    });
+    // Click Handlers For Form Buttons
+    $('.submit').on('click', (event) => {
+        if (!formEl.form('is valid')) {
+          return false;
+        }
+        username = $('#username').val();
+        const roomName = $('#roomName').val().toLowerCase();
+        if (event.target.id === 'create-btn') {
+            createRoom(roomName);
+        } else {
+            joinRoom(roomName);
+        }
+        return false;
     });
 });
