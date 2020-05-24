@@ -109,4 +109,23 @@ const postMessage = (message) => {
             }
         });
     };
+
+    // Update Chat Messages
+    const updateChatMessages = () => {
+        const html = chatContentTemplate({ messages });
+        const chatContentEl = $('#chat-content');
+        chatContentEl.html(html);
+        // automatically scroll downwards
+        const scrollHeight = chatContentEl.prop('scrollHeight');
+        chatContentEl.animate({ scrollTop: scrollHeight }, 'slow');
+    };
+
+    // Receive message from remote user
+    webrtc.connection.on('message', (data) => {
+    if (data.type === 'chat') {
+        const message = data.payload;
+        messages.push(message);
+        updateChatMessages();
+        }
+    });
 });
