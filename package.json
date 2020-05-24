@@ -1,0 +1,37 @@
+{
+  "name": "peerjs",
+  "version": "1.0.0",
+  "description": "Learning how to create realtime video and audio communication using peerjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karanshah0206/PeerJS.git"
+  },
+  "keywords": [
+    "PeerJS",
+    "NodeJS",
+    "RealTime",
+    "Video",
+    "Realtime",
+    "Audio",
+    "Live",
+    "Communication"
+  ],
+  "author": "Karan Shah",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/karanshah0206/PeerJS/issues"
+  },
+  "homepage": "https://github.com/karanshah0206/PeerJS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "handlebars": "^4.7.6",
+    "jquery": "^3.5.1",
+    "semantic-ui-css": "^2.4.1",
+    "simplewebrtc": "^3.0.2"
+  }
+}
