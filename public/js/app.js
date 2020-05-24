@@ -6,13 +6,16 @@ window.addEventListener('load', () => {
     const formEl = $('.form');
     const messages = [];
     let username;
+
     // Local Video
     const localImageEl = $('#local-image');
     const localVideoEl = $('#local-video');
+
     // Remote Videos
     const remoteVideoTemplate = Handlebars.compile($('#remote-video-template').html());
     const remoteVideosEl = $('#remote-videos');
     let remoteVideosCount = 0;
+
     // Add validation rules to Create/Join Room Form
     formEl.form({
         fields: {
@@ -20,6 +23,7 @@ window.addEventListener('load', () => {
             username: 'empty',
         },
     });
+
     // Create our WebRTC connection
     const webrtc = new SimpleWebRTC({
         // the id/element dom element that will hold "our" video
@@ -29,11 +33,13 @@ window.addEventListener('load', () => {
         // immediately ask for camera access
         autoRequestMedia: true,
     });
+
     // We got access to local camera
     webrtc.on('localStream', () => {
         localImageEl.hide();
         localVideoEl.show();
     });
+
     // Click Handlers For Form Buttons
     $('.submit').on('click', (event) => {
         if (!formEl.form('is valid')) {
@@ -48,4 +54,21 @@ window.addEventListener('load', () => {
         }
         return false;
     });
+
+    // Register new Chat Room
+    const createRoom = (roomName) => {
+        console.info(`Creating new room: ${roomName}`);
+        webrtc.createRoom(roomName, (err, name) => {
+        showChatRoom(name);
+        postMessage(`${username} created chatroom`);
+        });
+    };
+    
+    // Join existing Chat Room
+    const joinRoom = (roomName) => {
+        console.log(`Joining Room: ${roomName}`);
+        webrtc.joinRoom(roomName);
+        showChatRoom(roomName);
+        postMessage(`${username} joined chatroom`);
+    };
 });
